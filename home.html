@@ -50,7 +50,9 @@ video#local {
         <button class="btn btn-success" ng-click="start()">Mulai</button>
       </div>
     </div>
-    Silakan saltem alamat ini dan kirim ke rekan ngobrel Anda <input ng-show="room" value="{{url}}" size="50"></input>
+    <span ng-show="room">
+    Silakan saltem alamat ini dan kirim ke rekan ngobrel Anda <input value="{{url}}" size="50"></input>
+  </span>
   </div>
 </body>
 </html>
