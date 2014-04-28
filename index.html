@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ngobrel</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css"/>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/chance/chance.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="latest.js"></script>
+  <script src="ngobrel.js"></script>
+  <style>
+.remote-videos {
+  width: auto;
+  height: 250px;
+  overflow-x: auto;
+}
+video#local {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100px;
+  border-radius: 10px;
+}
+#remotes video {
+  height: 200px;
+  border-radius: 20px;
+}
+  </style>
+</head>
+<body ng-app="ngobrelApp" ng-controller="callCtrl">
+  <div class="container">
+    <div class="control" ng-show="room">
+      <span class="btn btn-xs btn-warning" ng-click="resume()" ng-show="paused"><span class="fa fa-play"></span> Hidupkan</span>
+      <span class="btn btn-xs btn-warning" ng-click="pause()" ng-hide="paused"><span class="fa fa-pause"></span> Stop kamera</span>
+      <span class="btn btn-xs btn-warning" ng-hide="muted" ng-click="mute()"><span class="fa fa-volume-off"></span> Bisu</span>
+      <span class="btn btn-xs btn-warning" ng-show="muted" ng-click="unmute()"><span class="fa fa-volume-up"></span> Suara</span>
+    </div>
+    <div class="jumbotron">
+      <div ng-show="room">
+        <video id="local"></video>
+        <div class="remote-videos">
+          <div id="remotes"></div>
+        </div>
+      </div>
+      <div ng-hide="room">
+        <h1>Selamat Datang</h1>
+        <h5>Silakan klik tombol ini untuk mulai ngobrel</h5>
+        <button class="btn btn-success" ng-click="start()">Mulai</button>
+      </div>
+    </div>
+    Silakan saltem alamat ini dan kirim ke rekan ngobrel Anda <input ng-show="room" value="{{url}}" size="50"></input>
+  </div>
+</body>
+</html>
