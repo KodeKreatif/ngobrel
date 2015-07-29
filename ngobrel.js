@@ -1,9 +1,9 @@
 var app = angular.module("ngobrelApp", [])
-.controller("callCtrl", ["$scope", function($scope) {
+.controller("callCtrl", ["$scope", "$location", function($scope, $location) {
   var webrtc;
 
-  $scope.room = location.search && location.search.split('?')[1].replace("/", "");
-  $scope.url = location.href;
+  $scope.room = $location.path();
+  $scope.url = $location.absUrl();
   $scope.muted = false;
   $scope.paused = false;
 
@@ -42,11 +42,9 @@ var app = angular.module("ngobrelApp", [])
   $scope.start = function() {
     var room = chance.word({length:10});
     webrtc.createRoom(room, function (err, name) {
-      var newUrl = location.pathname + '?' + name;
       if (!err) {
         $scope.room = room;
-        $scope.url = newUrl;
-        history.replaceState({}, null, newUrl);
+        $location.path("/" + name);
       }
     });
   }
